@@ -1,8 +1,10 @@
 from bs4 import BeautifulSoup
 import requests, urllib.request
-import os, csv, re
+import os, time, re
+import json
 
 class StarScraper:
+
 	def get_models(user, header, endpoint):
 
 		tempURIList = []
@@ -70,6 +72,11 @@ class StarScraper:
 		return star_map
 
 
+	def get_photos(user, header, endpoint):
+		pass
+
+
+
 
 
 ss = StarScraper()
@@ -77,7 +84,6 @@ print("Starting")
 # URIs
 zzHead, zzHeadSecure = "http://www.brazzers.com", "https://www.brazzers.com"
 URIList = []
-
 female_map = {}
 male_map = {}
 resultMap = {}
@@ -94,5 +100,15 @@ resultMap['Females'] = ss.get_profile(zzHeadSecure, URIList, female_map)
 URIList = ss.get_models(zzHead, maleEndPoint)
 resultMap['Males'] = ss.get_profile(zzHeadSecure, URIList, male_map)
 
-print("Finished")
+print("Finished Successfully.")
 print(resultMap)
+print("Writing Data to DB/Json")
+
+directory = "D:/zz/" 
+# year,month,day = 
+json_file = "%s_%s_%s.json" %(time.strftime('%Y'),time.strftime('%B'),time.strftime('%d'))
+json_filename = os.path.join(directory, json_file)
+
+json_object = json.dumps(resultMap, indent=4)
+with open(json_filename, "w") as file:
+	file.write(json_object)
