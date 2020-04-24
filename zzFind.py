@@ -2,9 +2,7 @@ from bs4 import BeautifulSoup
 import requests, urllib.request
 import os, csv, re
 
-
 class StarScraper:
-
 	def get_models(user, header, endpoint):
 
 		tempURIList = []
@@ -79,6 +77,7 @@ print("Starting")
 # URIs
 zzHead, zzHeadSecure = "http://www.brazzers.com", "https://www.brazzers.com"
 URIList = []
+
 female_map = {}
 male_map = {}
 resultMap = {}
@@ -95,4 +94,5 @@ resultMap['Females'] = ss.get_profile(zzHeadSecure, URIList, female_map)
 URIList = ss.get_models(zzHead, maleEndPoint)
 resultMap['Males'] = ss.get_profile(zzHeadSecure, URIList, male_map)
 
+print("Finished")
 print(resultMap)
